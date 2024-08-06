@@ -1,29 +1,29 @@
-#Import knihoven 
-from sympy import *
+from sympy import symbols, diff
 import scipy.integrate as integrate
 import numpy as np
 from math import factorial
 from time import process_time
+import sys
 
-#Derivace
-#   knihovna sympy 
+# Zvýšení limiWtu pro počet číslic při převodu na řetězec
+sys.set_int_max_str_digits(1000000)
 
+# Derivace s knihovnou SymPy
 def derivace_sym(funkce, promenna, hodnota):
     promenna = symbols("x")
     derivace = diff(funkce, promenna)
     return (derivace.subs(x, hodnota)).doit()
-    
+
 start = process_time()
 x = symbols('x')
 funkce = (6*x**3)*(4+2*x**-2)
 vysledek = derivace_sym(funkce, x, 7)
-
 konec = process_time()
 
 print("Knihovna Sympy:")
 print(f"Derivace je {vysledek} a Doba trvání výpočtu: {(konec - start)}")
 
-#   vlastní funkce 
+# Derivace vlastní funkce
 def f(x):
     return (6*x**3)*(4+2*x**-2)
 
@@ -38,8 +38,7 @@ print("Vlastní funkce:")
 print(f"Derivace funkce je {vysledek} a Doba trvání výpočtu: {(konec - start)}")
 print("\n")
 
-#Integrace 
-#   knihovna scipy
+# Integrace s knihovnou SciPy
 start = process_time()
 vysledek = integrate.quad(lambda x: (2*x**2-4*x+4)/4, 0, 2)
 konec = process_time()
@@ -47,7 +46,7 @@ konec = process_time()
 print("Knihovna Scipy:")
 print(f"Výpočet integrace je: {vysledek[0]} a Doba trvání výpočtu: {(konec - start)}")
 
-#   vlastní funkce (lichoběžníkové pravidlo)
+# Integrace vlastní funkcí (lichoběžníkové pravidlo)
 def f(x):
     return (2*x**2-4*x+4)/4
 
@@ -65,9 +64,7 @@ print("Vlastní funkce:")
 print(f"Výpočet integrace je: {vysledek} a Doba trvání výpočtu: {(konec - start)}")
 print("\n")
 
-
-#Skalární součin 
-#   knihovna numpy
+# Skalární součin s knihovnou NumPy
 start = process_time()
 a = np.array([2, 6, 10])
 b = np.array([3, 9, 15])
@@ -77,7 +74,7 @@ konec = process_time()
 print("Knihovna Numpy:")
 print(f"Skalární součin je: {vysledek} a Doba trvání výpočtu: {(konec - start)}")
 
-#   vlastní cyklus 
+# Skalární součin vlastní funkcí
 start = process_time()
 vysledek = 0
 a = (2, 6, 10)
@@ -90,9 +87,7 @@ print("Vlastní cyklus:")
 print(f"Skalární součin je {vysledek} a Doba trvání výpočtu: {(konec - start)}")
 print("\n")
 
-
-#Výpočet faktoriálu
-#   knihovna math
+# Výpočet faktoriálu s knihovnou Math
 start = process_time()
 x = 55200
 vysledek = factorial(x)
@@ -102,7 +97,7 @@ vysledek = str(vysledek)
 print("Knihovna Math:")
 print(f"Faktoriál z čísla {x} je {vysledek[:10]} a Doba trvání výpočtu: {(konec - start)}")
 
-#   vlastní cyklus 
+# Výpočet faktoriálu vlastní funkcí
 start = process_time()
 x = 55200
 vysledek = 1
@@ -115,9 +110,7 @@ print("Vlastní cyklus:")
 print(f"Faktoriál z čísla {x} je {vysledek[:10]} a Doba trvání výpočtu: {(konec - start)}")
 print("\n")
 
-
-#Násobení matice 
-#   knihovna numpy
+# Násobení matice s knihovnou NumPy
 start = process_time()
 matice = [[55, 1492, 2001], [606, 1526, 1944], [0, 1939, 2022]]
 vysledek = np.array(matice)*15
@@ -126,7 +119,7 @@ konec = process_time()
 print("Knihovna Numpy:")
 print(f"Matice je {vysledek} a Doba trvání výpočtu: {(konec - start)}")
 
-#   vlastní cyklus 
+# Násobení matice vlastní funkcí
 start = process_time()
 matice = [[55, 1492, 2001], [606, 1526, 1944], [0, 1939, 2022]]
 for i in range(len(matice)):
