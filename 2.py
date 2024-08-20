@@ -2,7 +2,7 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-titanic_data = pd.read_csv('train.csv')
+titanic_data = pd.read_csv('/content/drive/MyDrive/colab/train.csv')
 print(titanic_data.head())
 
 titanic_data['Age'].fillna(titanic_data['Age'].median(), inplace=True)
